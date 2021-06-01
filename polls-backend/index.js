@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const Poll = require('./models/poll');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
 // Connecting to Database
 const dbUrl ='mongodb://localhost:27017/polls-app';
@@ -17,6 +19,10 @@ mongoose.connection.once("open", () => {
     console.log("Database Connected!!");
 })
 
+// Middleware
+app.use(cors());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 // Defining Routes
 app.get('/', (req,res) => {
@@ -33,15 +39,6 @@ app.get('/polls', async(req, res) => {
 })
 
 app.post('/polls', async(req,res) => {
-    //const poll = new Poll({
-        //subject: 'Who will lose AO final?',
-        //duration: '6 days',
-        //votes: 7,
-        //choices: [
-            //{ choiceText: 'Novak Djokovic', choiceVotes: 2 },
-            //{ choiceText: 'Janik Sinner', choiceVotes: 5 },
-        //]
-    //});
     try{
         const poll = new Poll(req.body);
         await poll.save();

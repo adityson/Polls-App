@@ -2,13 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ChoiceSchema = new Schema({
-    choiceText: String,
-    choiceVotes: Number,
+    text: String,
+    votes: Number,
 });
 
 const PollSchema = new Schema({
     subject: String,
-    duration: String,
+    duration: Number,
     votes: Number,
     choices: [ChoiceSchema],
 })
