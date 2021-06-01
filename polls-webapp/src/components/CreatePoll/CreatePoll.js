@@ -40,12 +40,35 @@ const CreatePoll = () => {
         setAddCounter(addCounter+1);
     };
 
-    //const [currentChoices, setCurrentChoices] = useState([]);
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        dispatch(createPoll(pollData));
+        let currentChoices = [];
+        if(choice1Data.text){
+            currentChoices = [...currentChoices, choice1Data];
+            setChoice1Data({text: '', votes: 0});
+        }
+        if(choice2Data.text){
+            currentChoices = [...currentChoices, choice2Data];
+            setChoice2Data({text: '', votes: 0});
+        }
+        if(choice3Data.text){
+            currentChoices = [...currentChoices, choice3Data];
+            setChoice3Data({text: '', votes: 0});
+        }
+        if(choice4Data.text){
+            currentChoices = [...currentChoices, choice4Data];
+            setChoice4Data({text: '', votes: 0});
+        }
+
+        dispatch(createPoll({ ...pollData, choices: currentChoices }));
+
+        setPollData({
+            subject: '',
+            duration: '',
+            votes: 0,
+            choices: []
+        })
     };
 
     return (
@@ -107,7 +130,13 @@ const CreatePoll = () => {
                 > Add Option(s) 
                 </Button>
 
-                <Button color='primary' variant='contained' type='submit' fullWidth>
+                <Button 
+                    className={classes.formEle} 
+                    color='primary' 
+                    variant='contained' 
+                    type='submit' 
+                    fullWidth
+                >
                     Submit
                 </Button>
 

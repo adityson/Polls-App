@@ -22,6 +22,7 @@ mongoose.connection.once("open", () => {
 // Middleware
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
+// Required to parse form recieved from axios
 app.use(bodyParser.json());
 
 // Defining Routes
