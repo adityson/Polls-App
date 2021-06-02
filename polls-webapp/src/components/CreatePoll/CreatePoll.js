@@ -14,7 +14,6 @@ const CreatePoll = () => {
     const [pollData, setPollData] = useState({
         subject: '',
         duration: '',
-        votes: 0,
         choices: []
     })
 
@@ -66,7 +65,6 @@ const CreatePoll = () => {
         setPollData({
             subject: '',
             duration: '',
-            votes: 0,
             choices: []
         })
     };

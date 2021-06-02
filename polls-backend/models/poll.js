@@ -9,8 +9,19 @@ const ChoiceSchema = new Schema({
 const PollSchema = new Schema({
     subject: String,
     duration: Number,
-    votes: Number,
+    votes: {
+        type: Number,
+        default: 0,
+    },
+    likes: {
+        type: Number,
+        default: 0,
+    },
     choices: [ChoiceSchema],
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
 })
 
 module.exports = mongoose.model('Poll', PollSchema);
