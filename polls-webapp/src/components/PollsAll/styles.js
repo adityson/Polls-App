@@ -4,6 +4,7 @@ const useStyles = makeStyles(theme => ({
     gridMain: {
         display: 'flex',
         alignItems: 'stretch',
+        marginBottom: '10px',
     }
 }))
 
