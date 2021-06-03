@@ -5,6 +5,7 @@ const useStyles = makeStyles(theme => ({
     formPaper: {
         padding: theme.spacing(2),
         borderRadius: '10px',
+        backgroundColor: '#FFF3E0',
     },
     form : {
         display: 'flex',

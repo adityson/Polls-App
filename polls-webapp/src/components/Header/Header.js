@@ -7,9 +7,9 @@ const Header = ({ pageTitle }) => {
     const classes = useStyles();
     
     return (
-        <AppBar className={classes.appBar} position='static'>
-            <Typography variant='h2' align='center'>{pageTitle} </Typography>
-            <PollRounded style={{ margin: 10, fontSize: 50}} />
+        <AppBar color='default' className={classes.appBar} position='static'>
+            <Typography className={classes.title} variant='h2' align='center'>{pageTitle} </Typography>
+            <PollRounded style={{ color: '#690B3D', margin: 10, fontSize: 50}} />
         </AppBar>
     )
 }

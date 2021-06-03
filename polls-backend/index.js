@@ -49,6 +49,22 @@ app.post('/polls', async(req,res) => {
     }
 })
 
+app.delete('/polls/:id', async(req,res) => {
+    const { id } = req.params;
+    await Poll.findByIdAndDelete(id);
+    res.json({ message: 'Post Deleted Successfully'});
+})
+
+app.patch('/polls/:id/like', async(req,res) => {
+    const { id } = req.params;
+    if(!mongoose.Types.ObjectId.isValid(id))
+        return res.status(404).send('No post with that id');
+
+    const poll = await Poll.findById(id);
+    const updPoll = await Poll.findByIdAndUpdate(id, { likes: poll.likes + 1 }, { new: true });
+    res.send(updPoll);
+}) 
+
 const PORT = 5000;
 app.listen(PORT, () => {
     console.log(`Listening on PORT ${PORT}`);

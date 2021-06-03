@@ -8,6 +8,7 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'space-between',
         //height: '100%',
         borderRadius: '15px',
+        backgroundColor: '#FFF3E0',
     },
     expand: {
         transform: 'rotate(0deg)',
@@ -23,6 +24,11 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         justifyContent: 'space-between',
         padding: '0 16px 8px 16px',
+    },
+    btnGroup: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'stretch',
     },
 }))
 

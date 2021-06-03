@@ -62,6 +62,7 @@ const CreatePoll = () => {
 
         dispatch(createPoll({ ...pollData, choices: currentChoices }));
 
+        setAddCounter(0);
         setPollData({
             subject: '',
             duration: '',
