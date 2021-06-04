@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Button, Paper, Typography, TextField, InputLabel, MenuItem, Select, FormControl } from '@material-ui/core'
 import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
+import CreateIcon from '@material-ui/icons/Create';
+
 import { useDispatch } from 'react-redux'
 
 import useStyles from './styles'
@@ -74,7 +76,7 @@ const CreatePoll = () => {
         <Paper className={classes.formPaper}>
             <form className={classes.form} noValidate autoComplete='off' onSubmit={handleSubmit}>
 
-                <Typography variant='h5'> Create Poll</Typography>
+                <Typography variant='h5' className={classes.wrapIcon}> Create <CreateIcon /> </Typography>
 
                 <TextField 
                     variant='outlined' label='Subject' fullWidth className={classes.formEle}
@@ -131,8 +133,8 @@ const CreatePoll = () => {
 
                 <Button 
                     className={classes.formEle} 
-                    color='primary' 
                     variant='contained' 
+                    style={{backgroundColor: '#880E4F', color: 'white'}}
                     type='submit' 
                     fullWidth
                 >

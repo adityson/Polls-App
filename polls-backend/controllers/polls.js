@@ -35,3 +35,16 @@ export const likePoll = async(req,res) => {
     const updPoll = await Poll.findByIdAndUpdate(id, { likes: poll.likes + 1 }, { new: true });
     res.send(updPoll);
 }
+
+export const votePoll = async(req,res) => {
+    const { id, choiceId } = req.params;
+    if(!mongoose.Types.ObjectId.isValid(id))
+        return res.status(404).send('No post with that id');
+
+    const poll = await Poll.findById(id);
+    const curChoices = poll.choices;
+    const updChoices = curChoices.map((cho) => choiceId === cho._id.toString() ? {...cho.toObject(), votes: cho.votes + 1} : cho);
+    const updVotes = poll.votes + 1;
+    const updPoll = await Poll.findByIdAndUpdate(id, { votes: updVotes, choices: updChoices }, {new: true});
+    res.send(updPoll);
+}

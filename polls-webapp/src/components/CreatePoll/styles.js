@@ -14,6 +14,12 @@ const useStyles = makeStyles(theme => ({
     },
     formEle: {
         marginTop: theme.spacing(1),
+    },
+    wrapIcon: {
+        display: 'flex',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        color: '#3E2723'
     }
 }))
 

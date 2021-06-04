@@ -37,3 +37,12 @@ export const likePoll = (id) => async(dispatch) => {
         console.log(err);
     }
 }
+
+export const votePoll = (id, choiceId) => async(dispatch) => {
+    try{
+        const { data } = await api.votePoll(id, choiceId);
+        dispatch({ type: UPDATE_POLL, payload: data });
+    } catch(err){
+        console.log(err);
+    }
+}

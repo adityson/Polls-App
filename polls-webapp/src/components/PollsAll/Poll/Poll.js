@@ -7,7 +7,7 @@ import { DateTime, Duration } from 'luxon'
 import { useState } from 'react'
 
 import { useDispatch } from 'react-redux'
-import { deletePoll, likePoll } from '../../../actions/pollActions'
+import { deletePoll, likePoll, votePoll } from '../../../actions/pollActions'
 
 import useStyles from './styles'
 
@@ -20,7 +20,6 @@ const Poll = ({poll}) => {
     const DTcreated = DateTime.fromMillis(Date.parse(poll.createdAt));
     const DTexpire = DTcreated.plus(DTduration);
 
-    const voteHandler = () => {console.log('Imma Vote')}
     const likeHandler = () => dispatch(likePoll(poll._id));
     const deleteHandler = () => dispatch(deletePoll(poll._id));
 
@@ -49,16 +48,17 @@ const Poll = ({poll}) => {
                     <ExpandMoreIcon />
                 </IconButton>
                 <IconButton aria-label='delete-poll' onClick={deleteHandler}>
-                    <DeleteIcon />
+                    <DeleteIcon style={{color: '#A1887F'}}/>
                 </IconButton>
             </CardActions>
 
             <Collapse in={expanded} timeout='auto' unmountOnExit>
                 <CardContent className={classes.btnGroup}>
+                    <Typography variant='body2'>Votes: {poll.votes}</Typography>
                     <ButtonGroup orientation='vertical' variant='outlined' size='small'>
 
                     {poll.choices.map((choice) => (
-                        <Button key={choice._id} onClick={voteHandler}>{choice.text}</Button>
+                        <Button key={choice._id} onClick={() => dispatch(votePoll(poll._id, choice._id))}>{choice.text} &nbsp; {choice.votes}</Button>
                     ))}
 
                     </ButtonGroup>
