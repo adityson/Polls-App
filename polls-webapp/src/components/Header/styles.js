@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#FFF3E0',
+        backgroundColor: '#FFF8E1',
     },
     title: {
         color: '#690B3D',

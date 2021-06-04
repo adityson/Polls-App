@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'space-between',
         //height: '100%',
         borderRadius: '15px',
-        backgroundColor: '#FFF3E0',
+        backgroundColor: '#FFF8E1',
     },
     expand: {
         transform: 'rotate(0deg)',
