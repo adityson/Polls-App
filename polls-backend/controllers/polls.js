@@ -1,23 +1,14 @@
 import Poll from '../models/poll.js'
-import mongoose from 'mongoose'
 
 export const getPolls = async(req, res) => {
-    try{
-        const polls = await Poll.find({});
-        res.send(polls);
-    } catch(err) {
-        res.send({message: err.message})
-    }
+    const polls = await Poll.find({});
+    res.send(polls);
 }
 
 export const createPoll = async(req,res) => {
-    try{
-        const poll = new Poll(req.body);
-        await poll.save();
-        res.send(poll);
-    } catch(err) {
-        res.send({message: err.message});
-    }
+    const poll = new Poll(req.body);
+    await poll.save();
+    res.send(poll);
 }
 
 export const deletePoll = async(req,res) => {
@@ -28,8 +19,6 @@ export const deletePoll = async(req,res) => {
 
 export const likePoll = async(req,res) => {
     const { id } = req.params;
-    if(!mongoose.Types.ObjectId.isValid(id))
-        return res.status(404).send('No post with that id');
 
     const poll = await Poll.findById(id);
     const updPoll = await Poll.findByIdAndUpdate(id, { likes: poll.likes + 1 }, { new: true });
@@ -38,8 +27,6 @@ export const likePoll = async(req,res) => {
 
 export const votePoll = async(req,res) => {
     const { id, choiceId } = req.params;
-    if(!mongoose.Types.ObjectId.isValid(id))
-        return res.status(404).send('No post with that id');
 
     const poll = await Poll.findById(id);
     const curChoices = poll.choices;

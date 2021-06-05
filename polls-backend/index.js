@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import ExpressError from './utils/ExpressError.js'
 
 const app = express();
 
@@ -36,6 +37,15 @@ app.get('/', (req,res) => {
     res.send('Home route');
 })
 
+app.all('*', (req,res,next) => {
+    next(new ExpressError('Page not Found!!', 404));
+})
+
+app.use((err, req, res, next) => {
+    const { statusCode = 500 } = err;
+    if(!err.message) err.message = 'Something Went Wrong';
+    res.status(statusCode).send(err.stack);
+})
 
 const PORT = 5000;
 app.listen(PORT, () => {
