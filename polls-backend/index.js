@@ -1,7 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import bodyParser from 'body-parser';
 import ExpressError from './utils/ExpressError.js'
 
 const app = express();
@@ -25,10 +24,10 @@ mongoose.connection.once("open", () => {
 
 // Middleware
 app.use(cors());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.urlencoded({extended: true}));
 
 // Required to parse form recieved from axios
-app.use(bodyParser.json());
+app.use(express.json());
 
 // Defining Routes
 app.use('/polls', pollRoutes);
