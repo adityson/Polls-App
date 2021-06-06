@@ -13,6 +13,10 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         color: '#690B3D',
+    },
+    toolbar: {
+        display: 'flex',
+        justifyContent: 'flex-end',
     }
 }))
 
