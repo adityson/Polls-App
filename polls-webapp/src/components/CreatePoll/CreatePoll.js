@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Button, Paper, Typography, TextField, InputLabel, MenuItem, Select, FormControl } from '@material-ui/core'
 import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
 import CreateIcon from '@material-ui/icons/Create';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 import { useDispatch } from 'react-redux'
 
@@ -41,30 +42,43 @@ const CreatePoll = () => {
         setAddCounter(addCounter+1);
     };
 
+    const [handleError, setHandleError] = useState(false);
+    let optionCounter = 0;
     const handleSubmit = (e) => {
         e.preventDefault();
 
         let currentChoices = [];
         if(choice1Data.text){
+            optionCounter += 1;
             currentChoices = [...currentChoices, choice1Data];
-            setChoice1Data({text: '', votes: 0});
         }
         if(choice2Data.text){
+            optionCounter += 1;
             currentChoices = [...currentChoices, choice2Data];
-            setChoice2Data({text: '', votes: 0});
         }
         if(choice3Data.text){
+            optionCounter += 1;
             currentChoices = [...currentChoices, choice3Data];
-            setChoice3Data({text: '', votes: 0});
         }
         if(choice4Data.text){
+            optionCounter += 1;
             currentChoices = [...currentChoices, choice4Data];
-            setChoice4Data({text: '', votes: 0});
+        }
+
+        if(pollData.subject==='' || pollData.duration==='' || optionCounter<2){
+            setHandleError(true); 
+            return;
         }
 
         dispatch(createPoll({ ...pollData, choices: currentChoices }));
 
         setAddCounter(0);
+        optionCounter = 0;
+        setHandleError(false);
+        setChoice1Data({text: '', votes: 0});
+        setChoice2Data({text: '', votes: 0});
+        setChoice3Data({text: '', votes: 0});
+        setChoice4Data({text: '', votes: 0});
         setPollData({
             subject: '',
             duration: '',
@@ -81,10 +95,14 @@ const CreatePoll = () => {
                 <TextField 
                     variant='outlined' label='Subject' fullWidth className={classes.formEle}
                     value={pollData.subject}
+                    error={handleError && pollData.subject===''} helperText={(handleError && pollData.subject==='') ? 'Mandatory':''}
                     onChange={(e) => setPollData({...pollData, subject: e.target.value})}
                 />
 
-                <FormControl fullWidth className={classes.formEle} variant='outlined'>
+                <FormControl
+                    fullWidth className={classes.formEle} variant='outlined'
+                    error={handleError && pollData.duration===''}
+                >
                     <InputLabel id='select-duration'>Duration</InputLabel>
                     <Select 
                         labelId='select-duration' 
@@ -100,8 +118,10 @@ const CreatePoll = () => {
                         <MenuItem value={6}>6 Days</MenuItem>
                         <MenuItem value={7}>7 Days</MenuItem>
                     </Select>
+                    {(handleError && pollData.duration==='') ? <FormHelperText>Mandatory</FormHelperText> : ''}
                 </FormControl>
 
+                <FormControl fullWidth error={handleError && optionCounter<2}>
                 <TextField 
                     variant='outlined' label='Option 1' fullWidth className={classes.formEle}
                     value={choice1Data.text}
@@ -122,6 +142,9 @@ const CreatePoll = () => {
                     value={choice4Data.text}
                     onChange={(e) => setChoice4Data({...choice4Data, text: e.target.value})}
                 />}
+
+                {(handleError && optionCounter<2 && <FormHelperText>Required minimum 2 options</FormHelperText>)}
+                </FormControl>
 
                 <Button 
                     className={classes.formEle} 
