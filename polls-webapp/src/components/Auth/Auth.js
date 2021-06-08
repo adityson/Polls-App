@@ -9,6 +9,10 @@ import { useHistory } from 'react-router-dom'
 
 import useStyles from './styles'
 
+import { signin, signup } from '../../actions/authActions'
+
+const initialFormState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }
+
 const Auth = () => {
 
     const classes = useStyles();
@@ -16,13 +20,25 @@ const Auth = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isSignUp, setIsSignUp] = useState(false);
 
-    const handleSubmit = () => {}
-    const handleChange = () => {}
     const handleShowPassword = () => setShowPassword((prevVal) => !prevVal);
     const switchMode = () => {
         setIsSignUp((prevVal) =>  !prevVal);
         handleShowPassword(false);
     }
+
+    const [formData, setFormData] = useState(initialFormState);
+    const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if(isSignUp) {
+            dispatch(signup(formData, history));
+        } else {
+            dispatch(signin(formData, history));
+        }
+    }
+
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -40,7 +56,6 @@ const Auth = () => {
     }
 
     const googleFailure = (err) => console.log('Google Sign in failed!', err);
-    
 
     return (
         <Container component='main' maxWidth='xs'>

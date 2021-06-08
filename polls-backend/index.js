@@ -7,6 +7,7 @@ const app = express();
 
 import Poll from './models/poll.js';
 import pollRoutes from './routes/polls.js';
+import userRoutes from './routes/users.js';
 
 // Connecting to Database
 const dbUrl ='mongodb://localhost:27017/polls-app';
@@ -31,6 +32,7 @@ app.use(express.json());
 
 // Defining Routes
 app.use('/polls', pollRoutes);
+app.use('/user', userRoutes);
 
 app.get('/', (req,res) => {
     res.send('Home route');

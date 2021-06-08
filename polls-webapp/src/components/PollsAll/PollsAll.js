@@ -9,7 +9,6 @@ const PollsAll = () => {
     const classes = useStyles();
 
     const polls = useSelector((state) => state.polls);
-    console.log(polls);
 
     return (
         !polls.length ? <CircularProgress /> : (
