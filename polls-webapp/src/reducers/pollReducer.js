@@ -1,4 +1,4 @@
-import { ALL_POLLS, CREATE_POLL, UPDATE_POLL, DELETE_POLL } from '../actions/actionTypes'
+import { ALL_POLLS, CREATE_POLL, UPDATE_POLL, DELETE_POLL } from '../constants/actionTypes'
 
 export default function foo(state = [], action) {
     switch(action.type){

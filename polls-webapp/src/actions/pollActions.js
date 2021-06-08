@@ -1,6 +1,6 @@
 import * as api from '../api'
 
-import { ALL_POLLS, CREATE_POLL, DELETE_POLL, UPDATE_POLL } from './actionTypes'
+import { ALL_POLLS, CREATE_POLL, DELETE_POLL, UPDATE_POLL } from '../constants/actionTypes'
 
 export const getPolls = () => async(dispatch) => {
     try {
