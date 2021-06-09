@@ -14,6 +14,8 @@ const CreatePoll = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
+    const user = JSON.parse(localStorage.getItem('profile'));
+
     const [pollData, setPollData] = useState({
         subject: '',
         duration: '',
@@ -22,19 +24,19 @@ const CreatePoll = () => {
 
     const [choice1Data, setChoice1Data] = useState({
         text: '',
-        votes: 0,
+        votes: [],
     })
     const [choice2Data, setChoice2Data] = useState({
         text: '',
-        votes: 0,
+        votes: [],
     })
     const [choice3Data, setChoice3Data] = useState({
         text: '',
-        votes: 0,
+        votes: [],
     })
     const [choice4Data, setChoice4Data] = useState({
         text: '',
-        votes: 0,
+        votes: [],
     })
 
     const [addCounter, setAddCounter] = useState(0);
@@ -75,16 +77,26 @@ const CreatePoll = () => {
         setAddCounter(0);
         optionCounter = 0;
         setHandleError(false);
-        setChoice1Data({text: '', votes: 0});
-        setChoice2Data({text: '', votes: 0});
-        setChoice3Data({text: '', votes: 0});
-        setChoice4Data({text: '', votes: 0});
+        setChoice1Data({text: '', votes: []});
+        setChoice2Data({text: '', votes: []});
+        setChoice3Data({text: '', votes: []});
+        setChoice4Data({text: '', votes: []});
         setPollData({
             subject: '',
             duration: '',
             choices: []
         })
     };
+
+    if(!user){
+        return (
+            <Paper className={classes.formPaper}>
+                <Typography variant='h6' align='center'>
+                    Sign In to Create, Vote and much more!!
+                </Typography>
+            </Paper>
+        )
+    }
 
     return (
         <Paper className={classes.formPaper}>

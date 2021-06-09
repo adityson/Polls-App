@@ -1,9 +1,20 @@
 import axios from 'axios'
 
-const url = 'http://localhost:5000/polls';
+const API = axios.create({ baseURL: 'http://localhost:5000'})
 
-export const fetchPolls = () => axios.get(url);
-export const addPoll = (newPoll) => axios.post(url, newPoll);
-export const deletePoll = (id) => axios.delete(`${url}/${id}`);
-export const likePoll = (id) => axios.patch(`${url}/${id}/like`);
-export const votePoll = (id, choiceId) => axios.patch(`${url}/${id}/${choiceId}`);
+API.interceptors.request.use((req) => {
+    if(localStorage.getItem('profile')){
+        req.headers.authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
+    }
+
+    return req;
+})
+
+export const fetchPolls = () => API.get('/polls');
+export const addPoll = (newPoll) => API.post('/polls', newPoll);
+export const deletePoll = (id) => API.delete(`/polls/${id}`);
+export const likePoll = (id) => API.patch(`/polls/${id}/like`);
+export const votePoll = (id, choiceId) => API.patch(`/polls/${id}/${choiceId}`);
+
+export const signIn = (formData) => API.post('/user/signin', formData);
+export const signUp = (formData) => API.post('/user/signup', formData);

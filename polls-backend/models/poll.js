@@ -3,19 +3,23 @@ const Schema = mongoose.Schema;
 
 const ChoiceSchema = new Schema({
     text: String,
-    votes: Number,
+    votes: {
+        type: [String],
+        default: [],
+    },
 });
 
 const PollSchema = new Schema({
     subject: String,
     duration: Number,
+    author: String,
     votes: {
-        type: Number,
-        default: 0,
+        type: [String],
+        default: [],
     },
     likes: {
-        type: Number,
-        default: 0,
+        type: [String],
+        default: [],
     },
     choices: [ChoiceSchema],
     createdAt: {

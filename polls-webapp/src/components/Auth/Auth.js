@@ -23,7 +23,7 @@ const Auth = () => {
     const handleShowPassword = () => setShowPassword((prevVal) => !prevVal);
     const switchMode = () => {
         setIsSignUp((prevVal) =>  !prevVal);
-        handleShowPassword(false);
+        setShowPassword(false);
     }
 
     const [formData, setFormData] = useState(initialFormState);

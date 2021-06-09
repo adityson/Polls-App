@@ -1,6 +1,7 @@
 import { Typography, Card, CardContent, CardActions, Button, IconButton, Collapse, ButtonGroup } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import { DateTime, Duration } from 'luxon'
@@ -26,6 +27,8 @@ const Poll = ({poll}) => {
     const [expanded, setExpanded] = useState(false);
     const seeOptions = () => { setExpanded(!expanded); }
 
+    const user = JSON.parse(localStorage.getItem('profile'));
+
     return (
         <Card className={classes.mainCard}>
 
@@ -36,9 +39,12 @@ const Poll = ({poll}) => {
             </CardContent>
 
             <CardActions className={classes.actionsCard}>
-                <IconButton aria-label='like-poll' onClick={likeHandler}>
-                    <FavoriteBorderIcon color='secondary' />
-                    <Typography> &nbsp; {poll.likes}</Typography>
+                <IconButton aria-label='like-poll' disabled={!user?.result} onClick={likeHandler}>
+                    {poll.likes.find((id)=> id===(user?.result?.googleId || user?.result?._id)) ?
+                        <FavoriteIcon color='secondary' /> :
+                        <FavoriteBorderIcon color='secondary' />
+                    }
+                    <Typography> &nbsp; {poll.likes.length}</Typography>
                 </IconButton>
                 <IconButton 
                     aria-label='see-options' 
@@ -47,18 +53,20 @@ const Poll = ({poll}) => {
                 >
                     <ExpandMoreIcon />
                 </IconButton>
+                { (user?.result?.googleId === poll.author || user?.result?._id === poll.author) &&
                 <IconButton aria-label='delete-poll' onClick={deleteHandler}>
                     <DeleteIcon style={{color: '#A1887F'}}/>
                 </IconButton>
+                }
             </CardActions>
 
             <Collapse in={expanded} timeout='auto' unmountOnExit>
                 <CardContent className={classes.btnGroup}>
-                    <Typography variant='body2'>Votes: {poll.votes}</Typography>
+                    <Typography variant='body2'>Votes: {poll.votes.length}</Typography>
                     <ButtonGroup orientation='vertical' variant='outlined' size='small'>
 
                     {poll.choices.map((choice) => (
-                        <Button key={choice._id} onClick={() => dispatch(votePoll(poll._id, choice._id))}>{choice.text} &nbsp; {choice.votes}</Button>
+                        <Button key={choice._id} onClick={() => dispatch(votePoll(poll._id, choice._id))}>{choice.text} &nbsp; {choice.votes.length}</Button>
                     ))}
 
                     </ButtonGroup>
