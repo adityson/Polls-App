@@ -6,6 +6,8 @@ import User from '../models/user.js'
 export const signin = async(req,res) => {
     const { email, password } = req.body;
 
+    if(!email || !password) return res.status(400).json({ message: 'Fields with * are mandatory!' });
+
     const user = await User.findOne({ email });
     if(!user)
         return res.status(404).json({ message: 'User doesn\'t exist!' });
@@ -20,6 +22,8 @@ export const signin = async(req,res) => {
 
 export const signup = async(req,res) => {
     const { firstName, lastName, email, password, confirmPassword } = req.body;
+
+    if(!firstName || !lastName || !email || !password || !confirmPassword) return res.status(400).json({ message: 'Fields with * are mandatory!' });
 
     const existingUser = await User.findOne({ email });
     if(existingUser) return res.status(400).json({ message: 'User already exists!' });

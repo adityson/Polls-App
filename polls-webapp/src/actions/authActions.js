@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 export const signin = (formData, history) => async(dispatch) => {
     try {
         const { data } = await api.signIn(formData);
+        toast.success('You\'re successfully logged in!');
 
         dispatch({ type: AUTH, data });
 
@@ -23,6 +24,7 @@ export const signin = (formData, history) => async(dispatch) => {
 export const signup = (formData, history) => async(dispatch) => {
     try {
         const { data } = await api.signUp(formData);
+        toast.success('You\'re successfully registered now!');
 
         dispatch({ type: AUTH, data });
 

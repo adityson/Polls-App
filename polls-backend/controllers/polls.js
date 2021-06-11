@@ -15,7 +15,7 @@ export const createPoll = async(req,res) => {
 export const deletePoll = async(req,res) => {
     const { id } = req.params;
     await Poll.findByIdAndDelete(id);
-    res.json({ message: 'Post Deleted Successfully'});
+    res.json({ message: 'Poll Deleted Successfully'});
 }
 
 export const likePoll = async(req,res) => {

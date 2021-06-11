@@ -16,6 +16,7 @@ export const getPolls = () => async(dispatch) => {
 export const createPoll = (poll) => async(dispatch) => {
     try {
         const { data } = await api.addPoll(poll);
+        toast.success('Poll created succesfully!')
         dispatch({ type: CREATE_POLL, payload: data});
     } catch(err) {
         if(err.response.data.message){
@@ -29,6 +30,7 @@ export const createPoll = (poll) => async(dispatch) => {
 export const deletePoll = (id) => async(dispatch) => {
     try{
         await api.deletePoll(id);
+        toast.success('Poll deleted succesfully!');
         dispatch({ type: DELETE_POLL, payload: id});
     } catch(err) {
         if(err.response.data.message){
