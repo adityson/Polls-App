@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 export const isLoggedIn = async (req, res, next) => {
     try {
         if(!req.headers.authorization)
-            return res.status(401).json({ message: 'You need to be Signed in.'});
+            return res.status(401).json({ message: 'Sign In required for this action.'});
 
         const token = req.headers.authorization.split(' ')[1];
         const isCustomAuth = token.length < 500;

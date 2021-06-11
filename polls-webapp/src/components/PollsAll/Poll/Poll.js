@@ -39,7 +39,7 @@ const Poll = ({poll}) => {
             </CardContent>
 
             <CardActions className={classes.actionsCard}>
-                <IconButton aria-label='like-poll' disabled={!user?.result} onClick={likeHandler}>
+                <IconButton aria-label='like-poll' onClick={likeHandler}>
                     {poll.likes.find((id)=> id===(user?.result?.googleId || user?.result?._id)) ?
                         <FavoriteIcon color='secondary' /> :
                         <FavoriteBorderIcon color='secondary' />

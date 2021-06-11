@@ -19,11 +19,12 @@ export const signin = async(req,res) => {
 }
 
 export const signup = async(req,res) => {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, confirmPassword } = req.body;
 
     const existingUser = await User.findOne({ email });
-    if(existingUser)
-        return res.status(400).json({ message: 'User already exists!' });
+    if(existingUser) return res.status(400).json({ message: 'User already exists!' });
+
+    if(password !== confirmPassword) return res.status(400).json({ message: 'Please make sure the passwords match!' });
 
     const hashedPassword = await bcrypt.hash(password, 12);
     const user = await User.create({ email, password: hashedPassword, name: `${firstName} ${lastName}` });

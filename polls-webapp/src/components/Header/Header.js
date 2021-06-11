@@ -41,7 +41,7 @@ const Header = ({ pageTitle }) => {
     return (
         <AppBar color='default' className={classes.appBar} position='static'>
             <Typography component={Link} to='/' style={{textDecoration:'none'}} className={classes.title} variant='h2' align='center'>{pageTitle} </Typography>
-            <PollRounded style={{ color: '#690B3D', margin: 10, fontSize: 50}} />
+            <PollRounded style={{ color: '#690B3D', margin: 10, fontSize: 50 }} />
             <Toolbar className={classes.toolbar}>
                 {user ? (
                     <>

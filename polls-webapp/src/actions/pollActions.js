@@ -2,6 +2,8 @@ import * as api from '../api'
 
 import { ALL_POLLS, CREATE_POLL, DELETE_POLL, UPDATE_POLL } from '../constants/actionTypes'
 
+import { toast } from 'react-toastify'
+
 export const getPolls = () => async(dispatch) => {
     try {
         const { data } = await api.fetchPolls();
@@ -16,7 +18,11 @@ export const createPoll = (poll) => async(dispatch) => {
         const { data } = await api.addPoll(poll);
         dispatch({ type: CREATE_POLL, payload: data});
     } catch(err) {
-        console.log(err.message);
+        if(err.response.data.message){
+            toast.error(err.response.data.message);
+        } else{
+            console.log(err.message);
+        }
     }
 }
 
@@ -25,7 +31,11 @@ export const deletePoll = (id) => async(dispatch) => {
         await api.deletePoll(id);
         dispatch({ type: DELETE_POLL, payload: id});
     } catch(err) {
-        console.log(err);
+        if(err.response.data.message){
+            toast.error(err.response.data.message);
+        } else {
+            console.log(err.message);
+        }
     }
 }
 
@@ -34,7 +44,11 @@ export const likePoll = (id) => async(dispatch) => {
         const { data } = await api.likePoll(id);
         dispatch({ type: UPDATE_POLL, payload: data });
     } catch(err) {
-        console.log(err);
+        if(err.response.data.message){
+            toast.error(err.response.data.message);
+        } else{
+            console.log(err.message);
+        }
     }
 }
 
@@ -43,6 +57,10 @@ export const votePoll = (id, choiceId) => async(dispatch) => {
         const { data } = await api.votePoll(id, choiceId);
         dispatch({ type: UPDATE_POLL, payload: data });
     } catch(err){
-        console.log(err);
+        if(err.response.data.message){
+            toast.error(err.response.data.message);
+        } else {
+            console.log(err.message);
+        }
     }
 }

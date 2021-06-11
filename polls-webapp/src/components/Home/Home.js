@@ -19,16 +19,16 @@ const Home = () => {
     }, [dispatch]);
 
     return (
-      <Container>
-          <Grid className={classes.mainCon} container justify='space-between' spacing={3}>
-              <Grid item xs={12} sm={7}>
-              <PollsAll/>
-              </Grid>
-              <Grid item xs={12} sm={4}>
-              <CreatePoll />
-              </Grid>
-          </Grid>
-      </Container>
+        <Container>
+            <Grid className={classes.mainCon} container justify='space-between' spacing={3}>
+                <Grid item xs={12} sm={7}>
+                    <PollsAll/>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                    <CreatePoll />
+                </Grid>
+            </Grid>
+        </Container>
     )
 }
 
