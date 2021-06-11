@@ -28,6 +28,7 @@ const Poll = ({poll}) => {
     const seeOptions = () => { setExpanded(!expanded); }
 
     const user = JSON.parse(localStorage.getItem('profile'));
+    const userVoted = poll.votes.findIndex((id) => (id === user?.result?._id || id === user?.result?.googleId));
 
     return (
         <Card className={classes.mainCard}>
@@ -66,7 +67,7 @@ const Poll = ({poll}) => {
                     <ButtonGroup orientation='vertical' variant='outlined' size='small'>
 
                     {poll.choices.map((choice) => (
-                        <Button key={choice._id} onClick={() => dispatch(votePoll(poll._id, choice._id))}>{choice.text} &nbsp; {choice.votes.length}</Button>
+                        <Button key={choice._id} onClick={() => dispatch(votePoll(poll._id, choice._id))}>{choice.text} &nbsp; {userVoted!==-1 && choice.votes.length}</Button>
                     ))}
 
                     </ButtonGroup>

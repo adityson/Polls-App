@@ -33,7 +33,8 @@ const Header = ({ pageTitle }) => {
         }
 
         setUser(JSON.parse(localStorage.getItem('profile')));
-    }, [location])
+        // eslint-disable-next-line
+    }, [location, user]) 
 
     const dispatch = useDispatch();
     const history = useHistory();
