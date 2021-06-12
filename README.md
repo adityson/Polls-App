@@ -18,7 +18,7 @@
 
 ### Features:
 * Users can register, login and logout (Authentication).
-* Registered users can make an entry of poll with it's subject, duration till which poll remains active, and options vote for.
+* Registered users can make an entry of poll with it's subject, duration for which poll remains active, and options vote for.
 * Registered users can like and vote once on any poll.
 * Registered users can delete any polls they authored.
 
