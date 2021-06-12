@@ -61,9 +61,9 @@ const Auth = () => {
         <Container component='main' maxWidth='xs'>
             <Paper className={classes.formPaper}>
                 <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
+                    <LockOutlinedIcon style={{color: '#455A64'}} />
                 </Avatar>
-                <Typography component='h1' variant='h5'>{isSignUp ? 'Sign Up' : 'Sign In'}</Typography>
+                <Typography component='h1' variant='h5' style={{color: '#3E2723'}}>{isSignUp ? 'Sign Up' : 'Sign In'}</Typography>
                 <form className={classes.form} noValidate autoComplete='off' onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         {isSignUp && (
@@ -93,7 +93,7 @@ const Auth = () => {
                             handleChange={handleChange} type='password'
                         />}
                     </Grid>
-                    <Button type='submit' className={classes.submit} fullWidth variant='contained'>
+                    <Button type='submit' className={classes.submit} fullWidth variant='contained' style={{backgroundColor: '#880E4F', color: 'white'}} >
                         {isSignUp ? 'Sign Up' : 'Sign In'}
                     </Button>
                     <GoogleLogin 
@@ -103,6 +103,7 @@ const Auth = () => {
                                 onClick={renderProps.onClick} 
                                 disabled={renderProps.disabled}
                                 fullWidth
+                                style={{backgroundColor: '#880E4F', color: 'white'}}
                                 variant='contained'
                             >
                                 Google Sign In
@@ -114,7 +115,7 @@ const Auth = () => {
                     />
                     <Grid container justify='flex-end'>
                         <Grid item>
-                            <Button onClick={switchMode}>
+                            <Button onClick={switchMode} style={{marginTop: '5px'}}>
                                 { isSignUp ? 'Already have an account? Sign in' : 'Don\'t have an account? Sign up' }
                             </Button>
                         </Grid>
