@@ -26,3 +26,6 @@
 * Front-end on Netlify
 * Back-end on Heroku
 * Database on MongoDB Atlas
+
+### Run/Modify the Code:
+> Fork and clone the repository, then run `npm i && npm start` in both `polls-webapp` and `polls-backend` directories.
