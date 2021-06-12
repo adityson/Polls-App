@@ -1,3 +1,8 @@
+import dotenv from 'dotenv';
+if(process.env.NODE_ENV !== 'production'){
+    dotenv.config();
+}
+
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
@@ -5,12 +10,11 @@ import ExpressError from './utils/ExpressError.js'
 
 const app = express();
 
-import Poll from './models/poll.js';
 import pollRoutes from './routes/polls.js';
 import userRoutes from './routes/users.js';
 
 // Connecting to Database
-const dbUrl ='mongodb://localhost:27017/polls-app';
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/polls-app';
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -48,7 +52,7 @@ app.use((err, req, res, next) => {
     res.status(statusCode).send(err.stack);
 })
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Listening on PORT ${PORT}`);
 })

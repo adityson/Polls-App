@@ -9,7 +9,7 @@ export const isLoggedIn = async (req, res, next) => {
         const isCustomAuth = token.length < 500;
 
         if(token && isCustomAuth){
-            const decoded = jwt.verify(token, 'thisisasecret');
+            const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
             req.user = decoded?.id;
         } else {
             const decoded = jwt.decode(token);
