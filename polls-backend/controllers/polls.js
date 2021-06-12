@@ -38,6 +38,11 @@ export const votePoll = async(req,res) => {
     const { id, choiceId } = req.params;
 
     const poll = await Poll.findById(id);
+
+    const currentTime = new Date().getTime();
+    const createTime = Date.parse(poll.createdAt);
+    if(createTime + (poll.duration * 24 * 3600 * 1000) < currentTime) res.status(405).json({ message: 'Voting time is over for this poll!' });
+
     const curChoices = poll.choices;
 
     const choIndex = curChoices.findIndex((choice) => choiceId === choice._id.toString());
