@@ -64,7 +64,6 @@ const Header = ({ pageTitle }) => {
           </div>
         ) : (
           <Button size="medium" variant="contained" component={Link} to="/auth">
-            {" "}
             Sign In
           </Button>
         )}
