@@ -5,7 +5,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 import { DateTime, Duration } from "luxon";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useDispatch } from "react-redux";
 import { deletePoll, likePoll, votePoll } from "../../../actions/pollActions";
@@ -19,6 +19,11 @@ const Poll = ({ poll }) => {
   const DTduration = Duration.fromObject({ days: poll.duration });
   const DTcreated = DateTime.fromMillis(Date.parse(poll.createdAt));
   const DTexpire = DTcreated.plus(DTduration);
+
+  const [isExpired, setIsExpired] = useState(false);
+  useEffect(() => {
+    if(DTexpire.toMillis() < new Date().getTime()) setIsExpired(true);
+  }, [DTexpire])
 
   const likeHandler = () => dispatch(likePoll(poll._id));
   const deleteHandler = () => dispatch(deletePoll(poll._id));
@@ -73,7 +78,7 @@ const Poll = ({ poll }) => {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent className={classes.btnGroup}>
           <Typography variant="body2">Votes: {poll.votes.length}</Typography>
-          <ButtonGroup orientation="vertical" variant="outlined" size="small">
+          <ButtonGroup disabled={isExpired} orientation="vertical" variant="outlined" size="small">
             {poll.choices.map((choice) => (
               <Button
                 key={choice._id}
