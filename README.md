@@ -2,7 +2,7 @@
 
 #### Create, Vote, Like. Get opinions on anything by simply making a poll here.
 
-### [*Link to Live Hosting*](https://online-polls-app.netlify.app/)
+### [*Link to Live Hosting*](https://pollsfest.netlify.app/)
 
 ---------
 
