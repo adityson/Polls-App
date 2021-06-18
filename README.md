@@ -6,7 +6,7 @@
 
 ---------
 
-<img src='./poll_final.png' width='800'>
+<img src='./pollsfest.png' width='800'>
 
 ---------
 
