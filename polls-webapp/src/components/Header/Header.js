@@ -73,7 +73,7 @@ const Header = ({ pageTitle }) => {
 };
 
 Header.defaultProps = {
-  pageTitle: "Online Polls",
+  pageTitle: "Polls Fest",
 };
 
 export default Header;
